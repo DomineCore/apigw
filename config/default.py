@@ -7,9 +7,15 @@ INSTALLED_APPS = [
     # 应用认证
     'oauth.appauth',
     # api调试器
-    'apidebuger'
+    'apidebuger',
+    # 应用管理器
+    'resource.appman',
+    # apisentry 存储api调用traceback
+    'resource.apisentry'
 ]
 
 MIDDLEWARE = [
 
 ]
+
+DEFAULT_SYS_NAME = 'apigw'
