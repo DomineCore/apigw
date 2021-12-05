@@ -3,7 +3,7 @@ from functools import wraps
 from rest_framework.response import Response
 
 from apischedule.models import RouteSchema
-from resource.app.models import App
+from resource.appman.models import AppMan
 from apigw.core.response import ResponseApi404
 
 def path_validator(func):
@@ -13,7 +13,7 @@ def path_validator(func):
         path = request.path
         appid = path.split('/')[0]
         apigw_url = '/' + path.lstrip(appid).lstrip('/')
-        app = App.objects.get_app(appid)
+        app = AppMan.objects.get_app(appid)
         route = RouteSchema.objects.get_url(apigw_url,appid)
         if not app:
             return ResponseApi404(appid)

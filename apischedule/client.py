@@ -5,12 +5,12 @@ from django.shortcuts import HttpResponse
 
 from apischedule.models import RouteSchema
 from requestrec.models import RequestRec
-from resource.app.models import App
+from resource.appman.models import AppMan
 
 
 class ApiClient(object):
     def __init__(self,
-        app:App,
+        app:AppMan,
         route:RouteSchema,
         ):
         self.route = route
