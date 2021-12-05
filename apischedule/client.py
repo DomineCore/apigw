@@ -46,12 +46,12 @@ class ApiClient(object):
             request_sys=from_sys,
             response_sys=self.app.app_id,
             method=method,
-            request_message=json.loads({
+            request_message=json.dumps({
                 "params":params,
                 "data":data,
                 "headers":headers
             }),
-            response_message=json.loads(resp),
+            response_message=resp,
             api=self.route.api_id
         )
         return HttpResponse(**resp)
