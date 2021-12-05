@@ -1,2 +1,8 @@
 # depend
 Django==3.2.9
+ujson==4.3.0
+djangorestframework==3.12.4
+daphne==3.0.2
+mysqlclient==2.1.0
+requests==2.26.0
+setuptools==58.5.3
