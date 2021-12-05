@@ -17,3 +17,5 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
 ]
+
+DEFAULT_SYS_NAME = 'apigw'
