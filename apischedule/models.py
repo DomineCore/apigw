@@ -17,4 +17,5 @@ class RouteSchema(models.Model):
 
     class Meta:
         unique_together = ("from_sys","apigw_url")
+        verbose_name = "网关路由表"
 

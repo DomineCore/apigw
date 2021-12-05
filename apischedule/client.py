@@ -43,6 +43,12 @@ class ApiClient(object):
     def request(self,method,params,data, headers,from_sys):
         try:
             resp = self._request(method,params,data,headers)
+            if not str(resp["status"]).startswith("2"):
+                ApiSentry.objects.save_trace(
+                    trace_msg=str(resp["content"]),
+                    api=self.route.api_id,
+                    sys=self.app.app_id
+                )
         except Exception as e:
             ApiSentry.objects.save_trace(
                 trace_msg=str(e),
@@ -57,7 +63,6 @@ class ApiClient(object):
             request_message=json.dumps({
                 "params":params,
                 "data":data,
-                "headers":headers
             }),
             response_message=resp,
             api=self.route.api_id

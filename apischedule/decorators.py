@@ -8,16 +8,17 @@ from apigw.core.response import ResponseApi404
 
 def path_validator(func):
     @wraps(func)
-    def wrapper(request, *args, **kwargs):
+    def wrapper(request, app_id, apigw_url, *args, **kwargs):
         # check param
-        path = request.path
-        appid = path.split('/')[0]
-        apigw_url = '/' + path.lstrip(appid).lstrip('/')
-        app = AppMan.objects.get_app(appid)
-        route = RouteSchema.objects.get_url(apigw_url,appid)
+        if not app_id:
+            return ResponseApi404(app_id)
+        if not apigw_url:
+            return ResponseApi404(app_id + '/' + apigw_url)
+        app = AppMan.objects.get_app(app_id)
+        route = RouteSchema.objects.get_url(apigw_url,app_id)
         if not app:
-            return ResponseApi404(appid)
+            return ResponseApi404(app_id)
         if not route:
-            return ResponseApi404(path)
+            return ResponseApi404(app_id + '/' + apigw_url)
         return func(request, app, route, *args, **kwargs)
     return wrapper

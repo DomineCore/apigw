@@ -12,3 +12,8 @@ class AppMan(models.Model):
     app_sk = models.CharField(max_length=255,null=False,verbose_name="应用密钥")
     name = models.CharField(max_length=255,verbose_name="应用名")
     host = models.CharField(max_length=255,verbose_name="应用HOST")
+
+    objects = AppManager()
+
+    class Meta:
+        verbose_name = "应用管理"
