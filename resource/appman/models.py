@@ -6,7 +6,7 @@ class AppManager(models.Manager):
         app = self.filter(app_id=appid).first()
         return app
 
-class App(models.Model):
+class AppMan(models.Model):
 
     app_id = models.BigAutoField(primary_key=True,verbose_name="APPID")
     app_sk = models.CharField(max_length=255,null=False,verbose_name="应用密钥")

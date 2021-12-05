@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='App',
+            name='AppMan',
             fields=[
                 ('app_id', models.BigAutoField(primary_key=True, serialize=False, verbose_name='APPID')),
                 ('app_sk', models.CharField(max_length=255, verbose_name='应用密钥')),

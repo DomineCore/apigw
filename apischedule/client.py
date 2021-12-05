@@ -5,12 +5,13 @@ from django.shortcuts import HttpResponse
 
 from apischedule.models import RouteSchema
 from requestrec.models import RequestRec
-from resource.app.models import App
+from resource.appman.models import AppMan
+from resource.apisentry.models import ApiSentry
 
 
 class ApiClient(object):
     def __init__(self,
-        app:App,
+        app:AppMan,
         route:RouteSchema,
         ):
         self.route = route
@@ -40,7 +41,14 @@ class ApiClient(object):
         )
     
     def request(self,method,params,data, headers,from_sys):
-        resp = self._request(method,params,data,headers)
+        try:
+            resp = self._request(method,params,data,headers)
+        except Exception as e:
+            ApiSentry.objects.save_trace(
+                trace_msg=str(e),
+                api=self.route.api_id,
+                sys=self.app.app_id
+            )
         # 记录请求
         RequestRec.objects.save_req_resp(
             request_sys=from_sys,

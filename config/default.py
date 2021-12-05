@@ -9,7 +9,9 @@ INSTALLED_APPS = [
     # api调试器
     'apidebuger',
     # 应用管理器
-    'resource.app'
+    'resource.appman',
+    # apisentry 存储api调用traceback
+    'resource.apisentry'
 ]
 
 MIDDLEWARE = [
