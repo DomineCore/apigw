@@ -4,8 +4,10 @@ INSTALLED_APPS = [
     'apischedule',
     # 网关请求记录
     'requestrec',
-    # 微信认证服务
-    'wxauth',
+    # 应用认证
+    'oauth.appauth',
+    # api调试器
+    'apidebuger'
 ]
 
 MIDDLEWARE = [
