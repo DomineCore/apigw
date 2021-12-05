@@ -1,3 +1,9 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'testdatabase'
+    }
+}
 
 INSTALLED_APPS = [
     # 网关路由转发
