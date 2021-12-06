@@ -1,5 +1,9 @@
 from django.db import models
 
+REQUEST_METHODS = (
+    ("GET", "GET"),
+    ("POST", "POST")
+)
 
 class RouteSchemaManager(models.Manager):
     def get_url(self,apigw_url,from_sys):
@@ -12,6 +16,7 @@ class RouteSchema(models.Model):
     apigw_url = models.CharField(max_length=255,null=False, verbose_name="在apigw的url")
     from_sys = models.IntegerField(null=False, verbose_name="所属应用")
     name = models.CharField(max_length=128, null=False, verbose_name="api名")
+    method = models.CharField(max_length=10, verbose_name="请求方法", choices=REQUEST_METHODS, default='GET')
 
     objects = RouteSchemaManager()
 

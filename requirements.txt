@@ -2,6 +2,8 @@
 Django==3.2.9
 ujson==4.3.0
 djangorestframework==3.12.4
+django-cors-headers==3.10.1
+django-filter==21.1
 daphne==3.0.2
 mysqlclient==2.1.0
 requests==2.26.0

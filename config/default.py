@@ -1,4 +1,6 @@
 
+from django.conf import settings
+
 INSTALLED_APPS = [
     # 网关路由转发
     'apischedule',
@@ -19,3 +21,5 @@ MIDDLEWARE = [
 ]
 
 DEFAULT_SYS_NAME = 'apigw'
+
+

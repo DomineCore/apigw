@@ -89,8 +89,8 @@ ENV/
 
 
 # Frontend project lib file
-static/pipeline/node_modules/
-node_modules/
+frontend/node_modules/
+frontend/dist/
 webpack_cache
 
 # OS generate file
@@ -101,11 +101,4 @@ webpack_cache
 .vscode/
 
 # local dev file
-static/dev
-static/images
-frontend/desktop/static
-gcloud/core/templates/core/base_vue.html
-static/bk_sops
-scripts/check_commit_message.py
-scripts/check_migrate/
-scripts/check_sensitive_info.sh
+static/
