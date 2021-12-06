@@ -24,7 +24,20 @@ from apischedule.urls import apigwpatterns
 def home(request):
     return render(request, 'index.html')
 
+
+from resource.urls import v1_api_router
 from apischedule.urls import apigwpatterns
+
+
+def home(request):
+    return render(request, 'index.html')
+
+from resource.urls import v1_api_router
+from apischedule.urls import apigwpatterns
+
+
+def home(request):
+    return render(request, 'index.html')
 
 
 urlpatterns = [
