@@ -24,6 +24,8 @@ from apischedule.urls import apigwpatterns
 def home(request):
     return render(request, 'index.html')
 
+from apischedule.urls import apigwpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

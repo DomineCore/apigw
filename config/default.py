@@ -21,5 +21,3 @@ MIDDLEWARE = [
 ]
 
 DEFAULT_SYS_NAME = 'apigw'
-
-
