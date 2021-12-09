@@ -1,5 +1,7 @@
 from django.db import models
 
+from apigw.models.fields import CustomDateTimeField
+
 
 class RequestRecManager(models.Manager):
     def save_req_resp(self, **kwargs):
@@ -15,7 +17,7 @@ class RequestRec(models.Model):
     method = models.CharField(max_length=10,verbose_name="请求方法",null=False)
     request_message = models.TextField(verbose_name="请求消息")
     response_message = models.TextField(verbose_name="响应消息")
-    request_time = models.DateTimeField(verbose_name="请求时间",auto_created=True,auto_now=True)
+    request_time = CustomDateTimeField(verbose_name="请求时间",auto_created=True,auto_now=True)
     api = models.IntegerField(verbose_name="请求的api")
     
     objects = RequestRecManager()

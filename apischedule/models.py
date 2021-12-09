@@ -9,6 +9,13 @@ class RouteSchemaManager(models.Manager):
     def get_url(self,apigw_url,from_sys):
         route = self.filter(from_sys=from_sys,apigw_url=apigw_url).first()
         return route
+    
+    def get_url_dict_by_appid(self, app_id):
+        url_dict = dict(
+            self.filter(from_sys=app_id)
+            .values_list("api_id","apigw_url")
+        )
+        return url_dict
 
 class RouteSchema(models.Model):
     api_id = models.BigAutoField(primary_key=True,verbose_name="API-ID")

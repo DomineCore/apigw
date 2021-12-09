@@ -1,7 +1,8 @@
+import env
 
 from django.conf import settings
 
-INSTALLED_APPS = [
+INSTALLED_APPS = settings.INSTALLED_APPS + [
     # 网关路由转发
     'apischedule',
     # 网关请求记录
@@ -16,10 +17,14 @@ INSTALLED_APPS = [
     'resource.apisentry'
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = settings.MIDDLEWARE + [
 
 ]
 
 DEFAULT_SYS_NAME = 'apigw'
 
+# APIGW访问地址
+APIGW_HOST = env.APIGW_HOST
 
+# 网关URL
+APIGW_ROOT_URL = APIGW_HOST.rstrip("/") + "/apigw/"
