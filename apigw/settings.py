@@ -15,7 +15,6 @@ import os
 
 from pathlib import Path
 
-from config import default
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters'
-] + default.INSTALLED_APPS
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-] + default.MIDDLEWARE
+]
 
 ROOT_URLCONF = 'urls'
 
@@ -134,6 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 运行时环境
 RUN_VER = env.RUN_VER
 
+from config.default import *
 if RUN_VER == "prod":
     from config.prod import *
 elif RUN_VER == "stag":
@@ -147,7 +147,7 @@ else:
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
-    
+    "http://127.0.0.1:8080",
 )
 
 CORS_ALLOW_METHODS = (
@@ -180,3 +180,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'frontend/dist/static')
 ]
+
