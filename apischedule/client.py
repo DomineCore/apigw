@@ -2,6 +2,8 @@ import ujson as json
 
 from requests import Session, Request
 from django.shortcuts import HttpResponse
+from rest_framework import status
+from rest_framework.response import Response
 
 from apischedule.models import RouteSchema
 from requestrec.models import RequestRec
@@ -43,18 +45,16 @@ class ApiClient(object):
     def request(self,method,params,data, headers,from_sys):
         try:
             resp = self._request(method,params,data,headers)
-            if not str(resp["status"]).startswith("2"):
-                ApiSentry.objects.save_trace(
-                    trace_msg=str(resp["content"]),
-                    api=self.route.api_id,
-                    sys=self.app.app_id
-                )
         except Exception as e:
+            resp = "调用系统发生未知异常，请联系开发者"
             ApiSentry.objects.save_trace(
                 trace_msg=str(e),
                 api=self.route.api_id,
                 sys=self.app.app_id
             )
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={
+                "message":resp
+            })
         # 记录请求
         RequestRec.objects.save_req_resp(
             request_sys=from_sys,
