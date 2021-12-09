@@ -28,3 +28,4 @@ APIGW_HOST = env.APIGW_HOST
 
 # 网关URL
 APIGW_ROOT_URL = APIGW_HOST.rstrip("/") + "/apigw/"
+
