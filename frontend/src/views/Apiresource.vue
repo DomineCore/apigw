@@ -34,7 +34,7 @@
         </div>
         <a-divider></a-divider>
         <div id="datas">
-            <a-table :columns="columns" :data-source="data">
+            <a-table :pagination="pagination" :columns="columns" :data-source="data">
                 <template #headerCell="{ column }">
                     <template v-if="column.key === 'name'">
                         <span>
@@ -55,8 +55,12 @@
                     </a>
                 </template>
                 <template v-else-if="column.key === 'action'">
-                    <span>
-                    <a>调用文档</a>
+                    <!-- <span>
+                    <a>Debug</a>
+                    </span>
+                    <a-divider type="vertical"></a-divider> -->
+                    <span @click="copyLink(record.apigw_url)">
+                    <a>CopyLink</a>
                     </span>
                 </template>
                 </template>
@@ -127,7 +131,8 @@ export default({
         // 刷新按钮loading
         refresh_load: false,
         // 显示选择应用warning
-        warning: false
+        warning: false,
+        pagination: {}
       }
   },
   computed: {
@@ -149,13 +154,14 @@ export default({
       ]),
       async requestApiResource() {
           // default sys
-          let sys = 1
-          if(this.currentapp){
-            sys = this.currentapp.id
+          if(!this.currentapp){
+            return
           }
           const params = {
-              "from_sys":sys
+              "from_sys":this.currentapp.app_id
           }
+          console.log("aaaaaa")
+          console.log(params)
           const response = await this.loadApiResource(params)
           this.data = response
       },
@@ -181,6 +187,27 @@ export default({
       },
       closeWarning() {
         this.warning = false
+      },
+      // 消息通知
+      openNotification(title, content) {
+        this.$notification.open({
+          message: title,
+          description:
+            content,
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+      },
+      // 复制连接
+      copyLink(apigw_url){
+        this.$copyText(apigw_url).then( res => {
+          // 复制成功
+          this.openNotification("已复制", apigw_url)
+        }, function(err) {
+          // 复制失败
+          this.openNotification("复制到剪贴板失败", apigw_url)
+        })
       }
   }
 })

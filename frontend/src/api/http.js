@@ -6,7 +6,7 @@ const http ={
             method: 'get',
             url:url
         }
-        if(params) config.params = params
+        if(params) config["params"] = params
         console.log(config)
         return service(config)
     },
